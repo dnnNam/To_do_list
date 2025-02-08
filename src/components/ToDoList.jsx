@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 
 function ToDoList() {
-  const [tasks, setTasks] = useState([
-    "Eat BreakFast",
+  // Khoi tao gia tri mac dinh
+  const initialTasks = [
+    "Eat BreakFast", //
     "Take a shower",
     "Walk a dog",
-  ]);
+  ];
+
+  const [tasks, setTasks] = useState(initialTasks);
 
   //  setTasks thay đổi tasks
   const [newTask, setNewTask] = useState("");
@@ -18,7 +21,8 @@ function ToDoList() {
     if (
       newTask.trim() !== "" // không cho bỏ trống khi bấm add ko thêm
     ) {
-      setTasks((t) => [...tasks, newTask]);
+      // setTasks((t) => [...tasks, newTask]);
+      setTasks((prevState) => [...prevState, newTask]);
       // hàm task là hàm dùng để cập nhập trạng thái tasks (giả định khai báo useState)
       // t là tham số của callBack , chính là giá trị hiện tại của task
       // thay vì viết setTasks[...tasks , newTask] dùng callBack để đảm bảo
@@ -76,7 +80,7 @@ function ToDoList() {
 
       <ol>
         {tasks.map((task, index) => (
-          <li key={index}>
+          <li key={String(task)}>
             <span className="text">{task}</span>
             <button className="delete-btn" onClick={() => deleteTask(index)}>
               delete
